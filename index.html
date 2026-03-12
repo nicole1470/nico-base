@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>nico-phone</title>
+<link rel="stylesheet" href="./app.css">
+<script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
+</head>
+<body>
+<div class="phone">
+
+<!-- 桌面 -->
+<div id="pg_desktop" class="page active">
+  <div class="desktop" id="deskBg">
+    <div class="desk-top">
+	 <button class="desk-fullscreen-btn" data-click="toggle-fullscreen" title="全屏">⛶</button>
+      <div class="desk-clock-area">
+        <div class="desk-time" id="dTime">12:00</div>
+        <div class="desk-date" id="dDate">2024年1月1日 星期一</div>
+      </div>
+      <div class="desk-widgets">
+        <!-- 天气卡片 -->
+        <div class="desk-weather" id="dWeather">
+          <div class="desk-weather-top">
+            <div class="desk-weather-icon" id="dWeatherIcon">☀️</div>
+            <div class="desk-weather-temp" id="dWeatherTemp">--°C</div>
+          </div>
+          <div class="desk-weather-bottom">
+            <div class="desk-weather-desc" id="dWeatherDesc">获取中</div>
+            <div class="desk-weather-city" id="dWeatherCity">定位中...</div>
+          </div>
+        </div>
+        <!-- 音乐卡片 -->
+        <div class="desk-music" data-click="open-music">
+          <div class="dm-bg" id="dmBg"></div>
+          <div class="dm-content">
+            <div class="dm-top">
+              <img class="dm-cover" id="dmCover" src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23ffffff33%22/><circle cx=%2250%22 cy=%2250%22 r=%2220%22 fill=%22%23ffffff66%22/></svg>">
+              <div class="dm-ctrls">
+                <button class="dm-btn dm-play-btn" id="dmPlayBtn" data-click="desk-music-toggle">▶</button>
+                <button class="dm-btn" data-click="desk-music-next">⏭</button>
+              </div>
+            </div>
+            <div class="dm-bottom">
+              <div class="dm-title" id="dmTitle">暂无播放</div>
+              <div class="dm-artist" id="dmArtist">打开音乐</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="desk-profile-quote">
+        <div class="desk-ava"><img id="dAvatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=desk" alt=""></div>
+        <div class="desk-quote-info">
+          <div class="desk-quote" id="dQuote">活在当下，珍惜每一刻</div>
+        </div>
+      </div>
+    </div>
+    <div class="desk-apps-grid">
+      <div class="app-icon" data-click="open-wechat">
+        <div class="app-bg app-bg--wechat">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><ellipse cx="10" cy="13" rx="7" ry="5.5" stroke="white" stroke-width="1.6" fill="none"/><circle cx="8" cy="13" r="1.2" fill="white"/><circle cx="12" cy="13" r="1.2" fill="white"/><ellipse cx="20" cy="16" rx="6" ry="4.5" stroke="white" stroke-width="1.4" fill="none"/><circle cx="18.5" cy="16" r="1" fill="white"/><circle cx="21.5" cy="16" r="1" fill="white"/></svg>
+        </div>
+        <div class="app-label">微信</div>
+      </div>
+      <div class="app-icon" data-click="open-weibo">
+        <div class="app-bg app-bg--weibo">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 7C10.03 7 6 10.36 6 14.5c0 2.3 1.3 4.35 3.35 5.7-.15.55-.5 1.95-.57 2.25-.09.38.14.37.29.27.12-.08 1.62-1.07 2.28-1.52.77.14 1.57.22 2.4.22 4.97 0 9-3.36 9-7.5S19.97 7 15 7z" stroke="white" stroke-width="1.6" fill="none"/><circle cx="12" cy="14" r="1.3" fill="white"/><circle cx="17" cy="14" r="1.3" fill="white"/></svg>
+        </div>
+        <div class="app-label">微博</div>
+      </div>
+      <div class="app-icon" data-click="open-search">
+        <div class="app-bg app-bg--search">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><circle cx="13.5" cy="13.5" r="6" stroke="white" stroke-width="1.8" fill="none"/><line x1="18.5" y1="18.5" x2="24" y2="24" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="app-label">搜索</div>
+      </div>
+      <div class="app-icon" data-click="open-translate">
+        <div class="app-bg app-bg--translate">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M5 9h12M11 6v3M8 9c0 3 2.5 5.5 6 7" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M13 16l2-2 2 2M14 22l4-8 4 8M15.5 19.5h3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="app-label">翻译</div>
+      </div>
+		<div class="app-icon" data-click="open-music">
+		  <div class="app-bg app-bg--music">
+			<svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+			  <path d="M11 8v12.5a3 3 0 1 1-1.5-2.6V10.2l10-2.2V18.5a3 3 0 1 1-1.5-2.6V9.9L11 11.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		  </div>
+		  <div class="app-label">音乐</div>
+		</div>
+      <div class="app-icon" data-click="open-video">
+        <div class="app-bg app-bg--video">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect x="3" y="7" width="18" height="16" rx="3" stroke="white" stroke-width="1.8" fill="none"/>
+            <path d="M21 11l6-3v14l-6-3V11z" stroke="white" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+            <circle cx="9" cy="15" r="2.5" fill="white"/>
+          </svg>
+        </div>
+        <div class="app-label">视频</div>
+      </div>
+      <div class="app-icon" data-click="open-work">
+        <div class="app-bg app-bg--work">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect x="5" y="12" width="20" height="13" rx="2.5" stroke="white" stroke-width="1.8" fill="none"/>
+            <path d="M10 12V9a5 5 0 0 1 10 0v3" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="15" y1="17" x2="15" y2="21" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="12" y1="19" x2="18" y2="19" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="app-label">工作</div>
+      </div>
+      <div class="app-icon" data-click="open-camera">
+        <div class="app-bg app-bg--camera">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect x="5" y="9" width="20" height="14" rx="3" stroke="white" stroke-width="1.8" fill="none"/>
+            <path d="M10 9l2-3h6l2 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="15" cy="16" r="4" stroke="white" stroke-width="1.8" fill="none"/>
+          </svg>
+        </div>
+        <div class="app-label">拍照</div>
+      </div>
+    </div>
+    <!-- Dock 栏：设置、世界书、预设、查手机 -->
+    <div class="desk-dock-bar">
+      <div class="dock-item" data-click="open-settings">
+        <div class="dock-icon-wrap dock-icon-wrap--settings">
+          <svg width="26" height="26" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="3.2" stroke="white" stroke-width="1.6" fill="none"/><path d="M15 5.5v2.2M15 22.3v2.2M5.5 15h2.2M22.3 15h2.2M8.4 8.4l1.55 1.55M20.05 20.05l1.55 1.55M8.4 21.6l1.55-1.55M20.05 9.95l1.55-1.55" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="dock-item-label">设置</div>
+      </div>
+      <div class="dock-item" data-click="open-worldbook">
+        <div class="dock-icon-wrap dock-icon-wrap--worldbook">
+          <svg width="26" height="26" viewBox="0 0 30 30" fill="none"><rect x="7" y="5" width="16" height="20" rx="2" stroke="white" stroke-width="1.6" fill="none"/><line x1="10" y1="10" x2="20" y2="10" stroke="white" stroke-width="1.4" stroke-linecap="round"/><line x1="10" y1="14" x2="20" y2="14" stroke="white" stroke-width="1.4" stroke-linecap="round"/><line x1="10" y1="18" x2="16" y2="18" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="dock-item-label">世界书</div>
+      </div>
+      <div class="dock-item" data-click="open-presets">
+        <div class="dock-icon-wrap dock-icon-wrap--presets">
+          <svg width="26" height="26" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="11" r="4.5" stroke="white" stroke-width="1.6" fill="none"/><path d="M7 24c0-4 3.58-7 8-7s8 3 8 7" stroke="white" stroke-width="1.6" stroke-linecap="round" fill="none"/><line x1="20" y1="8" x2="25" y2="8" stroke="white" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="11" x2="25" y2="11" stroke="white" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="14" x2="23" y2="14" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="dock-item-label">预设</div>
+      </div>
+      <div class="dock-item" data-click="open-phonecheck">
+        <div class="dock-icon-wrap dock-icon-wrap--phonecheck">
+          <svg width="26" height="26" viewBox="0 0 30 30" fill="none"><rect x="9" y="4" width="12" height="22" rx="2.5" stroke="white" stroke-width="1.6" fill="none"/><circle cx="15" cy="22" r="1.1" fill="white"/><line x1="12" y1="8" x2="18" y2="8" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="dock-item-label">查手机</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 视频 -->
+<div id="pg_video" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">视频</div>
+	<div class="nav-right"></div>
+  </div>
+  <div class="video-page-body">
+    <!-- 频道标签栏 -->
+    <div id="video_tabs" class="video-tabs-bar"></div>
+    <!-- 视频列表 -->
+    <div class="scroll video-list-wrap" id="video_list"></div>
+  </div>
+</div>
+
+<!-- 工作 -->
+<div id="pg_work" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">工作</div>
+    <div class="nav-right">
+      <button class="nbtn" data-click="work-edit" style="color:#007aff;">编辑</button>
+    </div>
+  </div>
+  <div class="scroll work-page-scroll" id="work_content"></div>
+</div>
+
+<!-- 拍照 -->
+<div id="pg_camera" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">拍照</div>
+  </div>
+  <div class="scroll page-scroll-p14">
+    <div class="camera-action-card">
+      <button class="btn btn-g" data-click="camera-take-photo">📷 立即拍照</button>
+	  <button class="btn btn-f" data-click="camera-pick-album">🖼️ 从相册选择</button>
+      <div class="camera-tip">先做入口版本，后续再补完整拍照/相册业务流程。</div>
+    </div>
+    <div id="camera_preview_wrap" class="camera-preview-card">
+      <div class="camera-preview-title">预览</div>
+      <img id="camera_preview_img" src="" class="camera-preview-img">
+    </div>
+  </div>
+</div>
+<!-- 设置 -->
+<div id="pg_settings" class="page">
+  <div class="nav">
+    <div class="nav-left">
+      <button class="nbtn" data-click="nav-back">返回</button>
+      <!-- 保存按钮已移除，统一为即改即存 -->
+    </div>
+    <div class="nav-title">设置</div>
+<div class="nav-right">
+  <input type="file" id="impFile" accept=".json" style="display:none">
+  <input type="file" id="catImpFile" accept=".json" style="display:none">
+</div>
+  </div>
+  <div class="scroll">
+
+    <!-- API与模型 -->
+    <div class="sec-title">API与模型</div>
+	<div class="card settings-card-pad">
+		<button class="btn btn-f" data-click="settings-api-paste" style="margin-bottom:8px;">📋 导入接口</button>
+		<div id="apiList" style="margin-bottom:8px;"></div>
+       <div style="border-top:1px solid #f0f0f0;padding-top:10px;">
+        <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px 10px;margin-bottom:8px;">
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">超时</div>
+            <div style="display:flex;align-items:center;gap:3px;">
+              <input class="inp" type="number" id="s_ai_timeout" min="30" max="600" step="10" style="padding:7px 6px;font-size:12px;text-align:center;" placeholder="300">
+              <span style="font-size:10px;color:#ccc;">秒</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">副模型 <span style="font-size:10px;color:#ccc;">摇一摇、人设、工作生成等</span></div>
+            <select class="sel" id="s_util_model" style="padding:7px 8px;font-size:12px;"></select>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px 10px;">
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">联网模型 <span style="font-size:9px;color:#ff9500;">(需API支持)</span></div>
+            <select class="sel" id="s_model_search" style="padding:7px 6px;font-size:12px;">
+              <option value="">关闭</option>
+              <option value="auto">自动（屏蔽虚拟世界观）</option>
+              <option value="always">始终</option>
+            </select>
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">生图 Key <span style="font-size:10px;color:#ccc;">Pollinations（必填）</span></div>
+            <input class="inp" type="password" id="s_pkey" placeholder="sk_XXX（pollinations.ai 获取）" style="padding:7px 8px;font-size:12px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- 搜索增强（并入 API 与模型） -->
+      <div style="border-top:1px solid #f0f0f0;padding-top:10px;margin-top:6px;">
+        <div style="font-size:12px;color:#576b95;font-weight:600;margin-bottom:8px;">🔎 搜索增强</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;">
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">搜索服务</div>
+            <select class="sel" id="s_search_type" style="padding:7px 8px;font-size:12px;">
+              <option value="">不使用</option>
+              <option value="tavily">Tavily（推荐：每月1000次）</option>
+              <option value="serper">Serper（2500次）</option>
+              <option value="brave">Brave（每月2000次）</option>
+              <option value="searxng">SearXNG（在线/本地）</option>
+            </select>
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">API Key</div>
+            <input class="inp" type="password" id="s_search_key" placeholder="填写Key" style="padding:7px 8px;font-size:12px;">
+          </div>
+        </div>
+        <div id="s_search_url_row" style="display:none;margin-top:6px;">
+          <div style="font-size:11px;color:#aaa;margin-bottom:3px;">SearXNG地址</div>
+          <input class="inp" id="s_search_url" placeholder="https://searx.example.com" style="padding:7px 8px;font-size:12px;">
+        </div>
+        <div style="padding-top:6px;font-size:10px;color:#ccc;line-height:1.6;">
+          <a href="https://tavily.com" target="_blank" style="color:#576b95;">Tavily</a> ·
+          <a href="https://serper.dev" target="_blank" style="color:#576b95;">Serper</a> ·
+          <a href="https://brave.com/search/api/" target="_blank" style="color:#576b95;">Brave</a> ·
+          <a href="https://searx.space/" target="_blank" style="color:#576b95;">SearXNG</a>
+        </div>
+      </div>
+
+      <!-- 多模态：生图 -->
+      <details style="border-top:1px solid #f0f0f0;padding-top:10px;margin-top:6px;">
+        <summary style="font-size:12px;color:#576b95;font-weight:600;margin-bottom:8px;cursor:pointer;outline:none;">🎨 拍照生图（独立）</summary>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;">
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">平台</div>
+            <select class="sel" id="s_img_provider" style="padding:7px 6px;font-size:12px;">
+              <option value="gemini">Gemini</option>
+              <option value="volc">火山引擎</option>
+            </select>
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">模型名</div>
+            <input class="inp" id="s_img_model" placeholder="gemini-3.1-flash-image-preview" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">API URL</div>
+            <input class="inp" id="s_img_endpoint" placeholder="https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">API Key</div>
+            <input class="inp" type="password" id="s_img_key" placeholder="sk-..." style="padding:7px 8px;font-size:12px;">
+          </div>
+        </div>
+		<div class="st-row" style="margin-top:6px;">
+		  <button class="st-btn p flex1" data-click="settings-mm-test-img">🧪 测试文生图</button>
+		  <button class="st-btn o flex1" data-click="settings-mm-test-img2img">🧪 测试图生图</button>
+		</div>
+      </details>
+
+      <!-- 多模态：音频 -->
+      <details style="border-top:1px solid #f0f0f0;padding-top:10px;margin-top:6px;">
+        <summary style="font-size:12px;color:#576b95;font-weight:600;margin-bottom:8px;cursor:pointer;outline:none;">🔊 音频（TTS）</summary>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;">
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">平台</div>
+            <select class="sel" id="s_audio_provider" style="padding:7px 6px;font-size:12px;">
+              <option value="">关闭</option>
+              <option value="openai">OpenAI TTS</option>
+              <option value="gemini">Gemini TTS</option>
+              <option value="volc">火山引擎TTS</option>
+            </select>
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">模型名</div>
+            <input class="inp" id="s_audio_model" placeholder="tts-1 / tts-1-hd" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">API URL</div>
+            <input class="inp" id="s_audio_endpoint" placeholder="https://api.openai.com/v1/audio/speech" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">API Key</div>
+            <input class="inp" type="password" id="s_audio_key" placeholder="sk-..." style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">语音音色</div>
+            <input class="inp" id="s_audio_voice" placeholder="alloy / nova / Aoede..." style="padding:7px 8px;font-size:12px;">
+          </div>
+        </div>
+        <button class="st-btn p w100" style="margin-top:6px;" data-click="settings-mm-test-audio">🧪 测试TTS</button>
+      </details>
+
+      <!-- 多模态：视频 -->
+      <details style="border-top:1px solid #f0f0f0;padding-top:10px;margin-top:6px;">
+        <summary style="font-size:12px;color:#576b95;font-weight:600;margin-bottom:8px;cursor:pointer;outline:none;">🎬 视频生成</summary>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;">
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">平台</div>
+            <select class="sel" id="s_video_provider" style="padding:7px 6px;font-size:12px;">
+              <option value="">关闭</option>
+              <option value="gemini">Gemini Veo</option>
+              <option value="volc">火山引擎</option>
+            </select>
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">模型名</div>
+            <input class="inp" id="s_video_model" placeholder="veo-2.0-generate-001" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">API URL</div>
+            <input class="inp" id="s_video_endpoint" placeholder="https://generativelanguage.googleapis.com/v1beta/models" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">API Key</div>
+            <input class="inp" type="password" id="s_video_key" placeholder="AIza..." style="padding:7px 8px;font-size:12px;">
+          </div>
+        </div>
+        <button class="st-btn p w100" style="margin-top:6px;" data-click="settings-mm-test-video">🧪 测试视频生成</button>
+      </details>
+
+    </div>
+
+    <!-- 对话设置 -->
+    <div class="sec-title">对话设置</div>
+    <div class="card settings-card-pad-lg">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="font-size:14px;color:#222;font-weight:500;">流式输出</div>
+          <label style="position:relative;display:inline-block;width:51px;height:31px;flex-shrink:0;">
+            <input type="checkbox" id="s_stream" style="opacity:0;width:0;height:0;">
+            <span id="s_stream_track" style="position:absolute;cursor:pointer;inset:0;background:#ccc;border-radius:31px;transition:.3s;"></span>
+            <span id="s_stream_thumb" style="position:absolute;height:23px;width:23px;left:4px;bottom:4px;background:#fff;border-radius:50%;transition:.3s;box-shadow:0 1px 3px rgba(0,0,0,.3);"></span>
+          </label>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="font-size:13px;color:#555;">最大Token</div>
+          <input type="number" class="inp" id="s_max_input" placeholder="200000" min="1000" step="1000"
+            style="width:90px;background:#f7f7f7;font-size:14px;color:#222;text-align:center;padding:5px 8px;border-radius:6px;">
+        </div>
+      </div>
+      <div style="border-top:1px solid #f2f2f2;padding-top:12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <div>
+          <div style="font-size:12px;color:#777;margin-bottom:5px;">温度</div>
+          <input class="inp" type="number" id="s_temperature" min="0" max="2" step="0.1" style="padding:7px;font-size:13px;background:#f9f9f9;text-align:center;border-radius:7px;" placeholder="0.8">
+        </div>
+        <div>
+          <div style="font-size:12px;color:#777;margin-bottom:5px;">Top-P</div>
+          <input class="inp" type="number" id="s_top_p" min="0" max="1" step="0.1" style="padding:7px;font-size:13px;background:#f9f9f9;text-align:center;border-radius:7px;" placeholder="1">
+        </div>
+        <div>
+          <div style="font-size:12px;color:#777;margin-bottom:5px;">后台聊天巡检(s)</div>
+          <input class="inp" type="number" id="s_ai_proactive_sec" min="30" max="600" step="10" style="padding:7px;font-size:13px;background:#f9f9f9;text-align:center;border-radius:7px;" placeholder="300">
+        </div>
+      </div>
+    </div>
+    <!-- 上下文注入策略 -->
+    <div class="sec-title">上下文</div>
+    <div class="card settings-card-pad">
+		<div style="display:flex;gap:7px;">
+		  <button class="btn btn-f" data-click="settings-ctx-p3" style="flex:1;margin:0;">⚡ 触发配置</button>
+		</div>
+		<div style="font-size:11px;color:#aaa;margin-top:6px;line-height:1.5;">
+		  调整触发关键词和随机注入概率
+		</div>
+    </div>
+    <!-- 桌面组件 -->
+    <div class="sec-title">桌面组件</div>
+    <div class="card" style="padding:10px 14px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;">
+        <div>
+          <div style="font-size:11px;color:#aaa;margin-bottom:3px;">桌面头像</div>
+          <input class="inp" id="s_dava" placeholder="https://..." style="padding:7px 8px;font-size:12px;">
+        </div>
+        <div>
+          <div style="font-size:11px;color:#aaa;margin-bottom:3px;">每日语录</div>
+          <input class="inp" id="s_dquote" placeholder="输入语录文字" style="padding:7px 8px;font-size:12px;">
+        </div>
+        <div>
+          <div style="font-size:11px;color:#aaa;margin-bottom:3px;">桌面壁纸</div>
+          <input class="inp" id="s_wall" placeholder="https://...（留空使用默认渐变）" style="padding:7px 8px;font-size:12px;">
+        </div>
+        <div>
+          <div style="font-size:11px;color:#aaa;margin-bottom:3px;">朋友圈背景</div>
+          <input class="inp" id="s_mwall" placeholder="https://...（留空同壁纸）" style="padding:7px 8px;font-size:12px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- 系统与数据 -->
+    <div class="sec-title">系统与数据</div>
+    <div class="card settings-card-pad">
+	<div class="st-grid-3">
+	  <button class="st-btn g center" data-click="settings-syslog-view">📋 日志</button>
+	  <button class="st-btn g center" data-click="settings-health-view">🩺 健康</button>
+	  <button class="st-btn r center" data-click="settings-syslog-clear">🗑️ 清日志</button>
+	</div>
+	<div class="st-row" style="margin-bottom:7px;">
+	  <button class="st-btn p flex1 center" id="btn_debug_toggle" data-click="settings-debug-toggle">🤖 全局调试</button>
+	  <button class="st-btn g flex1 center" data-click//="settings-debug-view">📜 查看日志</button>
+	</div>
+
+      <div style="border-top:1px solid #f0f0f0;padding-top:10px;margin-top:6px;">
+        <div style="font-size:12px;color:#576b95;font-weight:600;margin-bottom:8px;">☁️ GitHub 在线备份</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;">
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">GitHub 用户名</div>
+            <input class="inp" id="s_gh_user" placeholder="yourname" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div>
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">仓库名</div>
+            <input class="inp" id="s_gh_repo" placeholder="repo-name" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">GitHub Token</div>
+            <input class="inp" type="password" id="s_gh_token" placeholder="ghp_xxx / github pat" style="padding:7px 8px;font-size:12px;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:11px;color:#aaa;margin-bottom:3px;">备份文件名</div>
+            <input class="inp" id="s_gh_file" placeholder="phonedata.json" style="padding:7px 8px;font-size:12px;">
+          </div>
+        </div>
+		<div class="st-row" style="margin-top:6px;">
+		  <button class="st-btn p flex1 center" data-click="settings-github-upload">☁️ 上传备份</button>
+		  <button class="st-btn o flex1 center" data-click="settings-github-download">📥 下载恢复</button>
+		</div>
+        <div style="font-size:10px;color:#ccc;line-height:1.6;margin-top:6px;">
+          小于 1MB 单文件备份；超过时自动分片并写入 manifest
+        </div>
+      </div>
+
+		<div style="display:flex;gap:6px;margin-top:10px;">
+		  <button class="btn btn-f" data-click="settings-data-panel" style="flex:1;margin:0;">📦 导入导出</button>
+		  <button class="btn btn-r" data-click="settings-reset" style="flex:1;margin:0;font-size:13px;">⚠️ 重置</button>
+		</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 微信 -->
+<div id="pg_wechat" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">微信</div>
+    <div class="nav-right">
+      <button class="nbtn" data-click="wechat-search" style="padding:6px 8px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#576b95" stroke-width="1.6"/><line x1="12.5" y1="12.5" x2="16" y2="16" stroke="#576b95" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <button class="nbtn" data-click="wechat-new-chat" style="padding:6px 8px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8.5" stroke="#576b95" stroke-width="1.5"/><line x1="10" y1="6" x2="10" y2="14" stroke="#576b95" stroke-width="1.8" stroke-linecap="round"/><line x1="6" y1="10" x2="14" y2="10" stroke="#576b95" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="scroll" id="wc_content"></div>
+  <div class="wc-tabs">
+    <div class="wc-tab on" data-t="chats" data-click="wechat-tab-chats">
+      <svg class="wc-tab-ic" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4 4h9c1.1 0 2 .9 2 2v5c0 1.1-.9 2-2 2H9l-3 3v-3H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M13 10h4c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2h-1v2l-2-2h-3c-1.1 0-2-.9-2-2v-1" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </svg>
+      微信
+    </div>
+    <div class="wc-tab" data-t="contacts" data-click="wechat-tab-contacts">
+      <svg class="wc-tab-ic" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M16 11c1.7 0 3 1.3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M19 20c0-2.2-1.3-4-3-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      </svg>
+      通讯录
+    </div>
+    <div class="wc-tab" data-t="moments" data-click="wechat-tab-moments">
+      <svg class="wc-tab-ic" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      </svg>
+      朋友圈
+    </div>
+    <div class="wc-tab" data-t="me" data-click="wechat-tab-me">
+      <svg class="wc-tab-ic" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      </svg>
+      我
+    </div>
+  </div>
+</div>
+
+<!-- 角色详情 -->
+<div id="pg_chardetail" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">角色详情</div>
+    <div class="nav-right"><button class="nbtn" data-click="chardetail-edit">编辑</button></div>
+  </div>
+  <div class="scroll">
+    <div class="cd-hdr" id="cd_hdr"></div>
+	<div class="card" style="padding:13px 14px;">
+	  <div class="lbl" style="margin-bottom:7px;">角色设定</div>
+	  <div id="cd_prompt" style="font-size:14px;color:#444;line-height:1.7;white-space:pre-wrap;background:#f9f9f9;padding:11px;border-radius:7px;min-height:80px;"></div>
+	</div>
+
+	<div class="card" style="padding:13px 14px;">
+	  <div class="lbl" style="margin-bottom:7px;">关系</div>
+	  <div id="cd_relation" style="font-size:14px;color:#444;line-height:1.7;background:#f9f9f9;padding:11px;border-radius:7px;min-height:44px;"></div>
+
+	  <div class="lbl" style="margin:10px 0 7px;">身份</div>
+	  <div id="cd_identity" style="font-size:14px;color:#444;line-height:1.7;background:#f9f9f9;padding:11px;border-radius:7px;min-height:44px;"></div>
+	</div>
+
+	<div class="card" style="padding:12px 14px;">
+      <button class="btn btn-g" data-click="chardetail-chat">💬 开始聊天</button>
+	  <button class="btn" style="background:linear-gradient(135deg,#e91e8c,#9c27b0);color:#fff;" data-click="chardetail-wallet">角色钱包</button>
+	  <button class="btn btn-r" data-click="chardetail-del">删除角色</button>
+    </div>
+  </div>
+</div>
+
+<!-- 聊天窗口 -->
+<div id="pg_chat" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="chat-close">返回</button></div>
+    <div class="nav-title" id="chat_title">聊天</div>
+    <div class="nav-right">
+      <button class="nbtn" id="chat_stop_btn" style="display:none;color:#fa5151;" data-click="chat-stop">⏹</button>
+      <button class="nbtn" data-click="chat-debug" title="调试">🐛</button>
+      <button class="nbtn" data-click="chat-memory" title="记忆" style="font-size:13px;">🧠</button>
+      <button class="nbtn" data-click="chat-settings">⋯</button>
+    </div>
+  </div>
+  <div class="chat-win">
+    <div class="msgs" id="chat_msgs"></div>
+    <div class="multisel-bar" id="multisel_bar">
+      <div class="multisel-count" id="multisel_count">已选 0 条</div>
+      <button class="multisel-selall" data-click="chat-selall">全选</button>
+      <button class="multisel-cancel" data-click="chat-cancel-multisel">取消</button>
+      <button class="multisel-del" data-click="chat-del-selected">删除</button>
+    </div>
+    <div class="quote-bar" id="qbar">
+      <span style="font-size:12px;color:#aaa;flex-shrink:0;">回复</span>
+      <div class="qb-text" id="qbar_txt"></div>
+      <button class="qb-close" data-click="chat-clear-quote">✕</button>
+    </div>
+    <div class="tools-panel" id="tools_panel">
+      <button class="tool-btn" data-click="chat-pick-img"><div class="tool-ic">🖼️</div></button>
+      <button class="tool-btn" data-click="chat-open-emoji"><div class="tool-ic">😊</div></button>
+      <button class="tool-btn" data-click="chat-transfer"><div class="tool-ic">💰</div></button>
+      <button class="tool-btn" data-click="chat-redpacket"><div class="tool-ic">🧧</div></button>
+      <button class="tool-btn" data-click="chat-payrequest"><div class="tool-ic">🧾</div></button>
+      <button class="tool-btn" data-click="chat-gift"><div class="tool-ic">🎁</div></button>
+      <button class="tool-btn" data-click="chat-pick-file"><div class="tool-ic">📄</div></button>
+      <button class="tool-btn" data-click="chat-poke"><div class="tool-ic">👆</div></button>
+    </div>
+    <div class="ep" id="ep_panel">
+      <div class="ep-tabs" id="ep_tabs"></div>
+      <div id="ep_grid_wrap"></div>
+      <div class="ep-acts">
+		  <button class="ep-act" data-click="emoji-add-pack">➕ 添加表情包</button>
+		  <button class="ep-act" data-click="emoji-manage">⚙️ 管理</button>
+		</div>
+    </div>
+    <div style="position:relative;">
+      <div id="at_menu" class="at-menu" style="display:none;"></div>
+      <div class="input-bar">
+        <button class="plus-btn" data-click="chat-toggle-tools">➕</button>
+        <textarea class="chat-inp" id="chat_inp" placeholder="发送消息..." rows="1"></textarea>
+        <button class="send-btn" data-click="chat-send">发送</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 钱包 -->
+<div id="pg_wallet" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">钱包</div>
+  </div>
+  <div class="scroll">
+    <div class="wallet-hero">
+      <div class="wh-lbl">余额（元）</div>
+      <div class="wh-amt" id="w_bal">0.00</div>
+    </div>
+    <div class="card" style="padding:12px 14px;"><button class="btn btn-g" data-click="wallet-recharge">充值</button></div>
+    <div class="sec-title">交易记录</div>
+    <div id="w_txs"></div>
+  </div>
+</div>
+
+<!-- 微博 -->
+<div id="pg_weibo" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">微博</div>
+    <div class="nav-right">
+      <button class="model-pick-btn" id="wb_model_btn" data-click="pick-wb-model">选择模型</button>
+    </div>
+  </div>
+<div class="wb-tabbar">
+  <div class="wb-tab on" data-t="hot" data-click="weibo-tab-hot">热门</div>
+  <div class="wb-tab" data-t="mine" data-click="weibo-tab-mine">我的</div>
+</div>
+  <div class="scroll" id="weibo_content"></div>
+</div>
+
+<!-- 查手机 -->
+<div id="pg_phonecheck" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">查手机</div>
+    <div class="nav-right">
+      <button class="model-pick-btn" id="pc_model_btn" data-click="pick-pc-model">选择模型</button>
+    </div>
+  </div>
+  <div class="scroll phonecheck-page-scroll">
+	<div class="phonecheck-mode-row">
+	  <button id="pc_tab_self" data-click="phonecheck-mode-self" style="flex:1;padding:10px;border:none;border-radius:10px;background:#07c160;color:#fff;font-size:14px;cursor:pointer;font-family:inherit;">用户分析</button>
+	  <button id="pc_tab_role" data-click="phonecheck-mode-role" style="flex:1;padding:10px;border:none;border-radius:10px;background:#f2f2f2;color:#555;font-size:14px;cursor:pointer;font-family:inherit;">联系人手机</button>
+	</div>
+
+    <div id="pc_role_wrap" style="display:none;background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:10px;">
+      <div style="font-size:13px;color:#555;font-weight:600;margin-bottom:8px;">选择联系人</div>
+      <select id="pc_role_sel" class="sel"></select>
+      <div style="font-size:11px;color:#aaa;line-height:1.6;margin-top:6px;">
+        将生成TA近期的手机痕迹，同步注入聊天
+      </div>
+    </div>
+
+	<div class="phonecheck-run-row">
+	  <button class="btn btn-g" style="margin:0;flex:1;" data-click="phonecheck-run">开始检查</button>
+	</div>
+
+    <div id="pc_result" style="display:none;margin-top:0;background:#fff;padding:13px;border-radius:12px;box-shadow:0 1px 6px rgba(0,0,0,.08);"></div>
+  </div>
+</div>
+
+<!-- 世界书 -->
+<div id="pg_worldbook" class="page">
+  <div class="nav">
+    <div class="nav-left">
+      <button class="nbtn" data-click="nav-back">返回</button>
+      <button class="nbtn" data-click="worldbook-ai-generate" style="color:#ff9500;">✨生成</button>
+	  <button class="nbtn" data-click="worldbook-add">➕</button>
+    </div>
+    <div class="nav-title">世界书</div>
+    <div class="nav-right">
+      <button class="model-pick-btn" id="wb_gen_model_btn" data-click="pick-wb-gen-model">选择模型</button>
+    </div>
+  </div>
+  <div class="scroll worldbook-page-scroll" id="wb_list"></div>
+</div>
+
+<!-- 搜索 -->
+<div id="pg_search" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">搜索</div>
+    <div class="nav-right">
+      <button class="model-pick-btn" id="srch_model_btn" data-click="pick-srch-model">选择模型</button>
+    </div>
+  </div>
+  <div class="scroll search-page-scroll">
+    <!-- 热榜在顶部 -->
+    <div id="hot_section" class="search-hot-wrap"></div>
+    <!-- 搜索框 -->
+    <div class="search-box-wrap">
+      <div class="search-box-row">
+        <div class="search-inp-wrap" style="flex:1;">
+          <input class="inp" id="srch_inp" placeholder="问我任何问题...">
+        </div>
+        <button id="srch_send_btn" data-click="search-go" class="u-btn primary" style="padding:10px 16px;border-radius:10px;font-size:14px;white-space:nowrap;">搜索</button>
+      </div>
+      <!-- 追问上下文 -->
+      <div class="search-ctx-row">
+        <!-- 左侧：上下文激活状态（有上文时显示） -->
+        <div id="srch_ctx_indicator" style="display:none;align-items:center;gap:5px;font-size:11px;color:#aaa;">
+          <span style="background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:8px;">📌 上下文</span>
+          <span id="srch_ctx_count">已关联 1 条</span>
+          <button data-click="search-clear-context" class="u-btn" style="background:none;color:#fa5151;font-size:11px;padding:2px 4px;border-radius:4px;">清空</button>
+        </div>
+        <div id="srch_ctx_placeholder" style="font-size:11px;color:#ccc;">上下文关联</div>
+        <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+          <span style="font-size:11px;color:#aaa;">追问条数</span>
+          <input type="number" id="srch_ctx_n_inp" min="1" max="20" step="1" class="u-input-mini">
+          <span style="font-size:11px;color:#aaa;">条</span>
+        </div>
+      </div>
+    </div>
+    <div id="srch_cancel_bar" class="search-cancel-wrap">
+	<button data-click="search-cancel" class="u-btn danger" style="width:100%;display:flex;align-items:center;justify-content:center;gap:5px;">
+	  <span>⏹</span> <span id="srch_timer">终止搜索</span>
+	</button>
+    </div>
+    <div id="srch_res" class="search-result-wrap">
+      <div class="empty" style="margin-top:12vh;"><div class="empty-ic">🔍</div><div class="empty-txt">输入问题，AI为你解答</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 翻译 -->
+<div id="pg_translate" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">翻译</div>
+    <div class="nav-right">
+      <button class="model-pick-btn" id="tl_model_btn" data-click="pick-tl-model">选择模型</button>
+    </div>
+  </div>
+  <div class="translate-shell">
+<div class="translate-top">
+  <div class="translate-style-row">
+    <button id="tl_style_pro" data-click="translate-style-pro" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid #07c160;background:#07c160;color:#fff;font-size:13px;cursor:pointer;font-family:inherit;font-weight:500;">专业</button>
+    <button id="tl_style_brief" data-click="translate-style-brief" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid #e0e0e0;background:#f7f7f7;color:#555;font-size:13px;cursor:pointer;font-family:inherit;">精简</button>
+    <button id="tl_style_oral" data-click="translate-style-oral" style="flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid #e0e0e0;background:#f7f7f7;color:#555;font-size:13px;cursor:pointer;font-family:inherit;">口语</button>
+  </div>
+  <div class="translate-pdf-row">
+    <button id="tl_pdf_mode_text" data-click="translate-pdf-text"
+      style="flex:1;padding:6px 4px;border-radius:8px;border:1.5px solid #07c160;background:#07c160;color:#fff;font-size:12px;cursor:pointer;font-family:inherit;font-weight:500;">📄 文字PDF</button>
+    <button id="tl_pdf_mode_vision" data-click="translate-pdf-vision"
+      style="flex:1;padding:6px 4px;border-radius:8px;border:1.5px solid #e0e0e0;background:#f7f7f7;color:#555;font-size:12px;cursor:pointer;font-family:inherit;">🖼️ 图文PDF</button>
+  </div>
+  <div id="tl_pdf_mode_tip" style="font-size:11px;color:#aaa;margin-bottom:8px;padding:6px 8px;background:#e8f5e9;border-radius:6px;border-left:3px solid #07c160;">
+    📄 文字PDF：无需视觉模型，支持超大文件
+  </div>
+  <div class="translate-lang-row" style="align-items:center;">
+    <select id="tl_from" style="flex:1;padding:7px 8px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;background:#fafafa;font-family:inherit;color:#333;">
+      <option value="auto">自动检测</option>
+      <option value="zh">中文</option>
+      <option value="en">英文</option>
+      <option value="ja">日语</option>
+      <option value="ko">韩语</option>
+      <option value="fr">法语</option>
+      <option value="de">德语</option>
+      <option value="es">西语</option>
+      <option value="ru">俄语</option>
+    </select>
+    <button data-click="translate-swap" style="padding:7px 10px;border:1px solid #e0e0e0;border-radius:8px;background:#fff;font-size:16px;cursor:pointer;">⇄</button>
+    <select id="tl_to" style="flex:1;padding:7px 8px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;background:#fafafa;font-family:inherit;color:#333;">
+      <option value="zh">中文</option>
+      <option value="en">英文</option>
+      <option value="ja">日语</option>
+      <option value="ko">韩语</option>
+      <option value="fr">法语</option>
+      <option value="de">德语</option>
+      <option value="es">西语</option>
+      <option value="ru">俄语</option>
+    </select>
+  </div>
+</div>
+    <div class="translate-main">
+      <div class="translate-card">
+        <textarea id="tl_input" placeholder="输入要翻译的内容..." class="translate-textarea"></textarea>
+        <div class="translate-bottom-row">
+          <div class="translate-bottom-right">
+            <button data-click="translate-pick-image" title="上传图片OCR翻译"
+              style="background:none;border:1px solid #e0e0e0;border-radius:7px;font-size:13px;color:#576b95;cursor:pointer;padding:5px 8px;display:flex;align-items:center;gap:3px;">
+              🖼️ <span style="font-size:12px;">图片</span>
+            </button>
+            <button data-click="translate-pick-file" title="上传txt/pdf文件翻译"
+              style="background:none;border:1px solid #e0e0e0;border-radius:7px;font-size:13px;color:#576b95;cursor:pointer;padding:5px 8px;display:flex;align-items:center;gap:3px;">
+              📄 <span style="font-size:12px;">文件</span>
+            </button>
+            <button data-click="translate-clear"
+              style="background:none;border:none;font-size:13px;color:#aaa;cursor:pointer;padding:5px 6px;">清空</button>
+          </div>
+          <span id="tl_char_count" style="font-size:11px;color:#bbb;flex-shrink:0;min-width:36px;text-align:center;">0字</span>
+          <button id="tl_go_btn" data-click="translate-go" style="flex:1;padding:10px;background:#07c160;color:#fff;border:none;border-radius:8px;font-size:15px;cursor:pointer;font-family:inherit;font-weight:500;">翻译</button>
+          <button id="tl_cancel_btn" data-click="translate-cancel" style="display:none;width:50px;padding:10px;background:#fa5151;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;">终止</button>
+        </div>
+		<div id="tl_file_tag" class="translate-file-tag">
+		  <span>📎</span><span id="tl_file_name">文件名</span>
+		  <button data-click="translate-clear-file" style="margin-left:auto;background:none;border:none;color:#aaa;cursor:pointer;font-size:13px;">✕</button>
+		</div>
+      </div>
+
+      <div class="translate-card">
+        <div id="tl_output" class="translate-output"></div>
+		<div class="translate-copy-row">
+			<button data-click="translate-copy" style="background:none;border:none;font-size:13px;color:#576b95;cursor:pointer;padding:4px 6px;">复制</button>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 音乐 -->
+<div id="pg_music" class="page">
+  <!-- 动态背景，position:absolute 相对于 pg_music 定位 -->
+  <div class="music-app-bg" id="music_app_bg"></div>
+
+  <!-- 顶部导航 -->
+<div class="nav music-nav-top">
+  <div class="nav-left">
+    <button class="nbtn music-nav-back" data-click="nav-back">返回</button>
+  </div>
+  <div class="nav-title music-nav-title">正在播放</div>
+  <div class="nav-right">
+    <button class="music-menu-toggle" id="music_menu_toggle" data-click="music-toggle-menu">
+      <span id="music_menu_icon">☰</span>
+    </button>
+  </div>
+</div>
+  <!-- 顶部歌库菜单 -->
+  <div class="music-top-menu" id="music_top_menu">
+    <div class="music-top-menu-inner">
+      <button class="music-top-item" data-click="music-menu-add"><span class="music-top-item-ic">🎵</span>添加/导入<span class="music-top-item-arrow">›</span></button>
+      <button class="music-top-item" data-click="music-menu-hot"><span class="music-top-item-ic">🔥</span>热门榜单<span class="music-top-item-arrow">›</span></button>
+      <button class="music-top-item" data-click="music-menu-fav"><span class="music-top-item-ic">💖</span>我的收藏<span class="music-top-item-arrow">›</span></button>
+      <button class="music-top-item" data-click="music-menu-history"><span class="music-top-item-ic">⏳</span>播放历史<span class="music-top-item-arrow">›</span></button>
+      <button class="music-top-item" data-click="music-menu-local"><span class="music-top-item-ic">📁</span>本地音乐<span class="music-top-item-arrow">›</span></button>
+    </div>
+  </div>
+  <!-- 封面视图 -->
+  <div id="music_cover_view" class="music-cover-view">
+    <img class="music-big-cover" id="music_big_cover" alt="">
+    <div class="music-song-title music-editable-title" id="music_p_name" data-click="music-edit-song" title="点击编辑">未播放</div>
+    <div class="music-song-artist" id="music_p_artist">打开右上角歌单开始播放</div>
+  </div>
+
+  <!-- 歌词视图 -->
+<div id="music_lyric_view" class="music-lyric-view">
+  <div id="music_lyric" class="music-lyric"><div class="music-lyric-empty">歌词将在播放后显示</div></div>
+</div>
+
+  <!-- 进度条 -->
+  <div class="music-progress-area">
+    <div class="music-progress-wrap">
+      <span class="music-time" id="music_cur_t">0:00</span>
+      <input type="range" class="music-progress" id="music_progress" min="0" max="1000" value="0">
+      <span class="music-time" id="music_dur_t">0:00</span>
+    </div>
+  </div>
+
+  <!-- 控制区 -->
+  <div class="music-ctrl-area">
+    <div class="music-ctrl-row">
+      <button class="music-ctrl-btn" id="music_mode_btn" data-click="music-toggle-mode" title="播放模式" style="font-size:18px;">🔁</button>
+      <button class="music-ctrl-btn" data-click="music-open-list" title="播放列表" style="font-size:15px;letter-spacing:-1px;">☰</button>
+      <button class="music-ctrl-btn" data-click="music-prev" style="font-size:18px;">⏮</button>
+      <button class="music-ctrl-btn main" id="music_btn_play" data-click="music-toggle">▶</button>
+      <button class="music-ctrl-btn" data-click="music-next" style="font-size:18px;">⏭</button>
+      <button class="music-ctrl-btn" id="music_fav" data-click="music-fav">☆</button>
+      <button class="music-ctrl-btn" data-click="music-open-download" style="font-size:15px;">⬇</button>
+    </div>
+  </div>
+
+  <!-- 歌单抽屉 -->
+  <div class="music-drawer" id="music_drawer">
+    <div class="music-drawer-inner">
+      <div class="music-drawer-handle"></div>
+      <div class="music-drawer-title">
+        <span id="music_drawer_title">榜单</span>
+        <button class="music-drawer-close" data-click="music-close-drawer">✕</button>
+      </div>
+	<div class="music-tabs-row" id="music_drawer_tabs"></div>
+      <div class="music-song-list" id="music_list">
+        <div style="text-align:center;padding:40px 0;color:rgba(255,255,255,.3);font-size:13px;">
+          <div style="font-size:24px;margin-bottom:8px;">🎵</div>
+          打开歌单加载音乐
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 下载音质选择弹窗 -->
+  <div class="music-dl-overlay" id="music_dl_overlay">
+    <div class="music-dl-sheet">
+      <div class="music-dl-title" id="music_dl_title">下载歌曲</div>
+      <div class="music-dl-q-grid music-dl-q-grid--3">
+        <button class="music-dl-q-btn" data-click="music-dl-exhigh">极高<small>320kbps</small></button>
+        <button class="music-dl-q-btn" data-click="music-dl-lossless">无损<small>FLAC</small></button>
+        <button class="music-dl-q-btn" data-click="music-dl-hires">Hi-Res<small>高解析</small></button>
+      </div>
+      <button class="music-dl-cancel" data-click="music-dl-cancel">取消</button>
+    </div>
+  </div>
+
+  <audio id="music_audio" preload="metadata"></audio>
+</div>
+<!-- 预设 -->
+<div id="pg_presets" class="page">
+  <div class="nav">
+    <div class="nav-left">
+      <button class="nbtn" data-click="nav-back">返回</button>
+    </div>
+    <div class="nav-title">预设</div>
+    <div class="nav-right">
+      <button class="nbtn" data-click="preset-add" style="font-size: 20px;">➕</button>
+    </div>
+  </div>
+  <div class="scroll preset-page-scroll" id="preset_list"></div>
+</div>
+
+<!-- 模态框 -->
+<div id="modal" class="modal">
+  <div class="mbox">
+    <div class="mtitle" id="m_title"></div>
+    <div class="mbody" id="m_body"></div>
+    <div class="mfoot" id="m_foot"></div>
+  </div>
+</div>
+
+<!-- 长按菜单 -->
+<div id="ctx" class="ctx" style="display:none;"></div>
+
+<!-- 图片预览 -->
+<div class="img-preview" id="imgPreview">
+  <img id="imgPreviewSrc" src="" alt="">
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
+</div><!-- /phone -->
+<script src="./core.obf.js"></script>
+<script src="./search.obf.js"></script>
+<script src="./work.obf.js"></script>
+<script src="./music.obf.js"></script>
+<script src="./translate.obf.js"></script>
+<script src="./phonecheck.obf.js"></script>
+<script src="./weibo.obf.js"></script>
+<script src="./chat.obf.js"></script>
+</body>
+</html>
