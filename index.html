@@ -177,22 +177,49 @@
   <div class="scroll work-page-scroll" id="work_content"></div>
 </div>
 
-<!-- 拍照 -->
+<!-- 拍照与相册 -->
 <div id="pg_camera" class="page">
   <div class="nav">
     <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
-    <div class="nav-title">拍照</div>
+    <div class="nav-title">相机</div>
+    <div class="nav-right">
+      <button class="nbtn" data-click="camera-export-zip">导出</button>
+      <input type="file" id="camera_import_zip" accept=".zip" style="display:none;">
+      <button class="nbtn" onclick="document.getElementById('camera_import_zip').click()">导入</button>
+    </div>
   </div>
-  <div class="scroll page-scroll-p14">
-    <div class="camera-action-card">
-      <button class="btn btn-g" data-click="camera-take-photo">📷 立即拍照</button>
-	  <button class="btn btn-f" data-click="camera-pick-album">🖼️ 从相册选择</button>
-      <div class="camera-tip">先做入口版本，后续再补完整拍照/相册业务流程。</div>
+  <div class="camera-tabs">
+    <div class="camera-tab on" id="cam_tab_take" data-click="camera-switch-tab" data-tab="take">拍照</div>
+    <div class="camera-tab" id="cam_tab_album" data-click="camera-switch-tab" data-tab="album">相册</div>
+  </div>
+  <div class="scroll page-scroll-soft" id="camera_content_take">
+    <div style="padding:16px;">
+      <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04);margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:600;margin-bottom:10px;color:#111;">1. 和谁一起合影？（可多选）</div>
+        <div id="cam_role_sel" style="display:flex;flex-wrap:wrap;gap:10px;max-height:160px;overflow-y:auto;padding-bottom:4px;"></div>
+      </div>
+      
+      <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04);margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px;color:#111;">2. 外貌参考图 (可选)</div>
+        <div style="font-size:11px;color:#aaa;margin-bottom:10px;">无则按人设生成（仅支持图生图模型）</div>
+        <div id="cam_ref_sel" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+
+      <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04);margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:600;margin-bottom:10px;color:#111;">3. 关联和谁的记录？(可选)</div>
+        <select class="sel" id="cam_chat_sel" style="background:#f9f9f9;border:none;border-radius:10px;"></select>
+      </div>
+      
+      <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.04);margin-bottom:20px;">
+        <div style="font-size:14px;font-weight:600;margin-bottom:10px;color:#111;">4. 画面描述 (可选)</div>
+        <textarea class="ta" id="cam_extra_prompt" placeholder="例如：在海滩散步，夕阳西下，大家都穿着夏装，笑容灿烂..." style="min-height:80px;background:#f9f9f9;border:none;border-radius:10px;"></textarea>
+      </div>
+      
+      <button class="btn btn-g" data-click="camera-generate" style="padding:14px;font-size:16px;border-radius:12px;box-shadow:0 4px 12px rgba(7,193,96,.3);">📸 咔嚓！生成照片</button>
     </div>
-    <div id="camera_preview_wrap" class="camera-preview-card">
-      <div class="camera-preview-title">预览</div>
-      <img id="camera_preview_img" src="" class="camera-preview-img">
-    </div>
+  </div>
+  <div class="scroll page-scroll-soft" id="camera_content_album" style="display:none;">
+    <div class="album-grid" id="album_grid"></div>
   </div>
 </div>
 <!-- 设置 -->
@@ -599,6 +626,7 @@
       <button class="tool-btn" data-click="chat-gift"><div class="tool-ic">🎁</div></button>
       <button class="tool-btn" data-click="chat-pick-file"><div class="tool-ic">📄</div></button>
       <button class="tool-btn" data-click="chat-poke"><div class="tool-ic">👆</div></button>
+      <button class="tool-btn" data-click="chat-photo"><div class="tool-ic">📸</div></button>
     </div>
     <div class="ep" id="ep_panel">
       <div class="ep-tabs" id="ep_tabs"></div>
@@ -647,6 +675,7 @@
   </div>
 <div class="wb-tabbar">
   <div class="wb-tab on" data-t="hot" data-click="weibo-tab-hot">热门</div>
+  <div class="wb-tab" data-t="anon" data-click="weibo-tab-anon">匿名</div>
   <div class="wb-tab" data-t="mine" data-click="weibo-tab-mine">我的</div>
 </div>
   <div class="scroll" id="weibo_content"></div>
