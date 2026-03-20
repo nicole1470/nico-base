@@ -57,68 +57,83 @@
       </div>
     </div>
     <div class="desk-apps-grid">
-      <div class="app-icon" data-click="open-wechat">
-        <div class="app-bg app-bg--wechat">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><ellipse cx="10" cy="13" rx="7" ry="5.5" stroke="white" stroke-width="1.6" fill="none"/><circle cx="8" cy="13" r="1.2" fill="white"/><circle cx="12" cy="13" r="1.2" fill="white"/><ellipse cx="20" cy="16" rx="6" ry="4.5" stroke="white" stroke-width="1.4" fill="none"/><circle cx="18.5" cy="16" r="1" fill="white"/><circle cx="21.5" cy="16" r="1" fill="white"/></svg>
+      <!-- 第一页 -->
+      <div class="desk-apps-page">
+        <div class="app-icon" data-click="open-wechat">
+          <div class="app-bg app-bg--wechat">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><ellipse cx="10" cy="13" rx="7" ry="5.5" stroke="white" stroke-width="1.6" fill="none"/><circle cx="8" cy="13" r="1.2" fill="white"/><circle cx="12" cy="13" r="1.2" fill="white"/><ellipse cx="20" cy="16" rx="6" ry="4.5" stroke="white" stroke-width="1.4" fill="none"/><circle cx="18.5" cy="16" r="1" fill="white"/><circle cx="21.5" cy="16" r="1" fill="white"/></svg>
+          </div>
+          <div class="app-label">微信</div>
         </div>
-        <div class="app-label">微信</div>
+        <div class="app-icon" data-click="open-weibo">
+          <div class="app-bg app-bg--weibo">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 7C10.03 7 6 10.36 6 14.5c0 2.3 1.3 4.35 3.35 5.7-.15.55-.5 1.95-.57 2.25-.09.38.14.37.29.27.12-.08 1.62-1.07 2.28-1.52.77.14 1.57.22 2.4.22 4.97 0 9-3.36 9-7.5S19.97 7 15 7z" stroke="white" stroke-width="1.6" fill="none"/><circle cx="12" cy="14" r="1.3" fill="white"/><circle cx="17" cy="14" r="1.3" fill="white"/></svg>
+          </div>
+          <div class="app-label">微博</div>
+        </div>
+        <div class="app-icon" data-click="open-search">
+          <div class="app-bg app-bg--search">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><circle cx="13.5" cy="13.5" r="6" stroke="white" stroke-width="1.8" fill="none"/><line x1="18.5" y1="18.5" x2="24" y2="24" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div class="app-label">搜索</div>
+        </div>
+        <div class="app-icon" data-click="open-translate">
+          <div class="app-bg app-bg--translate">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M5 9h12M11 6v3M8 9c0 3 2.5 5.5 6 7" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M13 16l2-2 2 2M14 22l4-8 4 8M15.5 19.5h3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="app-label">翻译</div>
+        </div>
+        <div class="app-icon" data-click="open-music">
+          <div class="app-bg app-bg--music">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <path d="M11 8v12.5a3 3 0 1 1-1.5-2.6V10.2l10-2.2V18.5a3 3 0 1 1-1.5-2.6V9.9L11 11.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="app-label">音乐</div>
+        </div>
+        <div class="app-icon" data-click="open-video">
+          <div class="app-bg app-bg--video">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <rect x="3" y="7" width="18" height="16" rx="3" stroke="white" stroke-width="1.8" fill="none"/>
+              <path d="M21 11l6-3v14l-6-3V11z" stroke="white" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+              <circle cx="9" cy="15" r="2.5" fill="white"/>
+            </svg>
+          </div>
+          <div class="app-label">视频</div>
+        </div>
+        <div class="app-icon" data-click="open-work">
+          <div class="app-bg app-bg--work">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <rect x="5" y="12" width="20" height="13" rx="2.5" stroke="white" stroke-width="1.8" fill="none"/>
+              <path d="M10 12V9a5 5 0 0 1 10 0v3" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="15" y1="17" x2="15" y2="21" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="12" y1="19" x2="18" y2="19" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="app-label">工作</div>
+        </div>
+        <div class="app-icon" data-click="open-camera">
+          <div class="app-bg app-bg--camera">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <rect x="5" y="9" width="20" height="14" rx="3" stroke="white" stroke-width="1.8" fill="none"/>
+              <path d="M10 9l2-3h6l2 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="15" cy="16" r="4" stroke="white" stroke-width="1.8" fill="none"/>
+            </svg>
+          </div>
+          <div class="app-label">拍照</div>
+        </div>
       </div>
-      <div class="app-icon" data-click="open-weibo">
-        <div class="app-bg app-bg--weibo">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 7C10.03 7 6 10.36 6 14.5c0 2.3 1.3 4.35 3.35 5.7-.15.55-.5 1.95-.57 2.25-.09.38.14.37.29.27.12-.08 1.62-1.07 2.28-1.52.77.14 1.57.22 2.4.22 4.97 0 9-3.36 9-7.5S19.97 7 15 7z" stroke="white" stroke-width="1.6" fill="none"/><circle cx="12" cy="14" r="1.3" fill="white"/><circle cx="17" cy="14" r="1.3" fill="white"/></svg>
+      <!-- 第二页 -->
+      <div class="desk-apps-page">
+        <div class="app-icon" data-click="open-novel">
+          <div class="app-bg app-bg--novel">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <path d="M6 7C6 5.89543 6.89543 5 8 5H22C23.1046 5 24 5.89543 24 7V23C24 24.1046 23.1046 25 22 25H8C6.89543 25 6 24.1046 6 23V7Z" stroke="white" stroke-width="1.8" fill="none"/>
+              <path d="M10 10H20M10 14H20M10 18H16" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="app-label">同人</div>
         </div>
-        <div class="app-label">微博</div>
-      </div>
-      <div class="app-icon" data-click="open-search">
-        <div class="app-bg app-bg--search">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><circle cx="13.5" cy="13.5" r="6" stroke="white" stroke-width="1.8" fill="none"/><line x1="18.5" y1="18.5" x2="24" y2="24" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </div>
-        <div class="app-label">搜索</div>
-      </div>
-      <div class="app-icon" data-click="open-translate">
-        <div class="app-bg app-bg--translate">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M5 9h12M11 6v3M8 9c0 3 2.5 5.5 6 7" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M13 16l2-2 2 2M14 22l4-8 4 8M15.5 19.5h3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="app-label">翻译</div>
-      </div>
-		<div class="app-icon" data-click="open-music">
-		  <div class="app-bg app-bg--music">
-			<svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-			  <path d="M11 8v12.5a3 3 0 1 1-1.5-2.6V10.2l10-2.2V18.5a3 3 0 1 1-1.5-2.6V9.9L11 11.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-			</svg>
-		  </div>
-		  <div class="app-label">音乐</div>
-		</div>
-      <div class="app-icon" data-click="open-video">
-        <div class="app-bg app-bg--video">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <rect x="3" y="7" width="18" height="16" rx="3" stroke="white" stroke-width="1.8" fill="none"/>
-            <path d="M21 11l6-3v14l-6-3V11z" stroke="white" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
-            <circle cx="9" cy="15" r="2.5" fill="white"/>
-          </svg>
-        </div>
-        <div class="app-label">视频</div>
-      </div>
-      <div class="app-icon" data-click="open-work">
-        <div class="app-bg app-bg--work">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <rect x="5" y="12" width="20" height="13" rx="2.5" stroke="white" stroke-width="1.8" fill="none"/>
-            <path d="M10 12V9a5 5 0 0 1 10 0v3" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="15" y1="17" x2="15" y2="21" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="12" y1="19" x2="18" y2="19" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="app-label">工作</div>
-      </div>
-      <div class="app-icon" data-click="open-camera">
-        <div class="app-bg app-bg--camera">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <rect x="5" y="9" width="20" height="14" rx="3" stroke="white" stroke-width="1.8" fill="none"/>
-            <path d="M10 9l2-3h6l2 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="15" cy="16" r="4" stroke="white" stroke-width="1.8" fill="none"/>
-          </svg>
-        </div>
-        <div class="app-label">拍照</div>
       </div>
     </div>
     <!-- Dock 栏：设置、世界书、预设、查手机 -->
@@ -499,9 +514,10 @@
 		  <button class="st-btn p flex1 center" data-click="settings-github-upload">☁️ 上传备份</button>
 		  <button class="st-btn o flex1 center" data-click="settings-github-download">📥 下载恢复</button>
 		</div>
-        <div style="font-size:10px;color:#ccc;line-height:1.6;margin-top:6px;">
-          小于 1MB 单文件备份；超过时自动分片并写入 manifest
-        </div>
+		<div style="margin-top:8px;display:flex;gap:8px;">
+		  <button data-click="camera-github-backup-album" style="flex:1;padding:8px;background:#07c160;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;">📸 备份相册</button>
+		  <button data-click="camera-github-restore-album" style="flex:1;padding:8px;background:#576b95;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;">📥 恢复相册</button>
+		</div>
       </div>
 
 		<div style="display:flex;gap:6px;margin-top:10px;">
@@ -618,6 +634,7 @@
       <button class="qb-close" data-click="chat-clear-quote">✕</button>
     </div>
     <div class="tools-panel" id="tools_panel">
+      <button class="tool-btn" data-click="chat-open-mall"><div class="tool-ic">🛒</div></button>
       <button class="tool-btn" data-click="chat-pick-img"><div class="tool-ic">🖼️</div></button>
       <button class="tool-btn" data-click="chat-open-emoji"><div class="tool-ic">😊</div></button>
       <button class="tool-btn" data-click="chat-transfer"><div class="tool-ic">💰</div></button>
@@ -880,8 +897,8 @@
   <!-- 顶部歌库菜单 -->
   <div class="music-top-menu" id="music_top_menu">
     <div class="music-top-menu-inner">
-      <button class="music-top-item" data-click//="music-menu-add"><span class="music-top-item-ic">🎵</span>添加/导入<span class="music-top-item-arrow">›</span></button>
-      <button class="music-top-item" data-click//="music-menu-hot"><span class="music-top-item-ic">🔥</span>热门榜单<span class="music-top-item-arrow">›</span></button>
+      <button class="music-top-item" data-click="music-menu-add"><span class="music-top-item-ic">🎵</span>添加/导入<span class="music-top-item-arrow">›</span></button>
+      <button class="music-top-item" data-click="music-menu-hot"><span class="music-top-item-ic">🔥</span>热门榜单<span class="music-top-item-arrow">›</span></button>
       <button class="music-top-item" data-click="music-menu-fav"><span class="music-top-item-ic">💖</span>我的收藏<span class="music-top-item-arrow">›</span></button>
       <button class="music-top-item" data-click="music-menu-history"><span class="music-top-item-ic">⏳</span>播放历史<span class="music-top-item-arrow">›</span></button>
       <button class="music-top-item" data-click="music-menu-local"><span class="music-top-item-ic">📁</span>本地音乐<span class="music-top-item-arrow">›</span></button>
@@ -917,7 +934,7 @@
       <button class="music-ctrl-btn main" id="music_btn_play" data-click="music-toggle">▶</button>
       <button class="music-ctrl-btn" data-click="music-next" style="font-size:18px;">⏭</button>
       <button class="music-ctrl-btn" id="music_fav" data-click="music-fav">☆</button>
-      <button class="music-ctrl-btn" data-click//="music-open-download" style="font-size:15px;">⬇</button>
+      <button class="music-ctrl-btn" data-click="music-open-download" style="font-size:15px;">⬇</button>
     </div>
   </div>
 
@@ -965,6 +982,18 @@
     </div>
   </div>
   <div class="scroll preset-page-scroll" id="preset_list"></div>
+</div>
+
+<!-- 阅读 -->
+<div id="pg_novel" class="page">
+  <div class="nav">
+    <div class="nav-left"><button class="nbtn" data-click="nav-back">返回</button></div>
+    <div class="nav-title">同人阅读</div>
+    <div class="nav-right">
+      <button class="model-pick-btn" id="novel_model_btn" data-click="pick-novel-model">选择模型</button>
+    </div>
+  </div>
+  <div class="scroll" id="novel_content" style="background:#f2f2f7;"></div>
 </div>
 
 <!-- 模态框 -->
