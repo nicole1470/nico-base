@@ -65,7 +65,8 @@ body.force-fullscreen .phone {
 .desk-time { font-size: 76px; color: #fff; font-weight: 200; letter-spacing: -2px; line-height: 1; text-shadow: 0 4px 24px rgba(0,0,0,0.2); }
 .desk-date { font-size: 13px; color: rgba(255,255,255,.8); margin-top: 6px; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
 /* 桌面并排组件区 */
-.desk-widgets { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; padding: 0 4px; }
+.desk-widgets { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; padding: 0 4px; align-items: stretch; }
+.desk-widgets > * { min-width: 0; overflow: hidden; }
 
 /* 全屏按钮 */
 .desk-fullscreen-btn {
@@ -95,7 +96,7 @@ body.force-fullscreen .phone {
 
 /* 天气卡片 */
 .desk-weather {
-  aspect-ratio: 1; background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.15); min-width: 0; overflow: hidden;
   backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
   border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 16px; color: #fff; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
@@ -109,7 +110,7 @@ body.force-fullscreen .phone {
 .desk-weather-city { font-size: 12px; color: rgba(255,255,255,.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* 音乐卡片 */
 .desk-music {
-  aspect-ratio: 1; border-radius: 24px; padding: 14px 16px;
+  border-radius: 24px; padding: 14px 16px;
   background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   display: flex; flex-direction: column; justify-content: space-between; color: #fff;
@@ -153,7 +154,7 @@ body.force-fullscreen .phone {
   background: rgba(255, 255, 255, 0.95); 
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 6px 18px rgba(0,0,0,0.1), inset 0 -2px 4px rgba(0,0,0,0.03); 
-  transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s; /* 果冻回弹动画 */
 }
 .app-bg svg { width: 36px !important; height: 36px !important; }
 .app-label { font-size: 12px; font-weight: 500; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.3); text-align: center; }
@@ -412,8 +413,7 @@ body.force-fullscreen .phone {
 .wb-time{font-size:12px;color:#ccc;margin-top:2px;}
 .wb-imgs{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:9px;}
 
-/* 修改微博内容的背景颜色，为了让卡片突显出来 */
-#pg_weibo .scroll { background: #f2f2f7; padding: 12px 10px; }
+#pg_weibo .scroll { background: #f2f2f7; padding: 0 10px 12px; }
 /* 独立的微博卡片设计 */
 .wb-post { background: #fff; padding: 16px; border-radius: 16px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border-bottom: none; }
 .wb-hdr { display: flex; gap: 10px; margin-bottom: 12px; align-items: center; }
@@ -1074,8 +1074,8 @@ body.force-fullscreen .phone {
 }
 
 .app-bg--novel{
-  background:linear-gradient(145deg,#ff2d55,#ff3b30);
-  box-shadow:0 6px 20px rgba(255,45,85,.45);
+  background:linear-gradient(145deg,#5856d6,#3634a3);
+  box-shadow:0 6px 20px rgba(88,86,214,.45);
 }
 
 /* ===== 内联样式拆分：Dock 图标背景 ===== */
@@ -1496,3 +1496,21 @@ body.force-fullscreen .phone {
   border-radius: 0 !important;
   box-shadow: none !important;
 }
+
+/* 同人阅读/编辑弹窗隐藏滚动条 */
+#pg_novel .scroll::-webkit-scrollbar { display: none; }
+#pg_novel .scroll { scrollbar-width: none; }
+#pg_novel .scroll div[style*="overflow-y:auto"]::-webkit-scrollbar { display: none; }
+#pg_novel .scroll div[style*="overflow-y:auto"] { scrollbar-width: none; }
+.mbox .ta::-webkit-scrollbar { display: none; }
+.mbox .ta { scrollbar-width: none; }
+.mbox div[style*="overflow-y:auto"]::-webkit-scrollbar { display: none; }
+.mbox div[style*="overflow-y:auto"] { scrollbar-width: none; }
+
+/* 教程页 */
+.guide-section{background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.guide-title{font-size:17px;font-weight:700;color:#111;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.guide-step{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:14px;color:#333;line-height:1.7;}
+.guide-step:last-child{border-bottom:none;}
+.guide-num{width:22px;height:22px;border-radius:50%;background:#007aff;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.guide-tip{background:#f0f8ff;border-left:3px solid #007aff;padding:8px 12px;border-radius:0 8px 8px 0;font-size:13px;color:#555;line-height:1.7;margin-top:8px;}
