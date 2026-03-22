@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
 <title>nico-phone</title>
 <link rel="stylesheet" href="./app.css">
 <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
@@ -137,7 +141,7 @@
         </div>
         <div class="desk-apps-grid-inner" style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px 16px; padding:0 24px; margin-top:auto;">
           <div class="app-icon" data-click="open-novel">
-            <div class="app-bg" style="background:linear-gradient(145deg,#5856d6,#3634a3);box-shadow:0 6px 20px rgba(88,86,214,.45);">
+            <div class="app-bg app-bg--novel">
               <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
                 <path d="M22 4c-3 3-6 8-8 13l-2 6 4-3c4-5 7-10 8-14l-2-2z" stroke="white" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
                 <path d="M12 23l-3 3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
@@ -147,7 +151,7 @@
             <div class="app-label">同人</div>
           </div>
           <div class="app-icon" data-click="open-theme">
-            <div class="app-bg" style="background:linear-gradient(145deg,#ff69b4,#ff1493);box-shadow:0 6px 20px rgba(255,20,147,.45);">
+            <div class="app-bg app-bg--theme">
               <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
                 <circle cx="10" cy="12" r="4" fill="white" opacity="0.9"/>
                 <circle cx="20" cy="12" r="4" fill="white" opacity="0.6"/>
@@ -158,7 +162,7 @@
             <div class="app-label">美化</div>
           </div>
           <div class="app-icon" data-click="open-guide">
-            <div class="app-bg" style="background:linear-gradient(145deg,#34aadc,#007aff);box-shadow:0 6px 20px rgba(0,122,255,.45);">
+            <div class="app-bg app-bg--guide">
               <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
                 <circle cx="15" cy="12" r="6" stroke="white" stroke-width="1.8" fill="none"/>
                 <path d="M15 18v3" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -311,7 +315,6 @@
             <select class="sel" id="s_model_search" style="padding:7px 6px;font-size:12px;">
               <option value="">关闭</option>
               <option value="auto">自动（屏蔽虚拟世界观）</option>
-              <option value="always">始终</option>
             </select>
           </div>
           <div>
@@ -647,11 +650,37 @@
   <div class="nav">
     <div class="nav-left"><button class="nbtn" data-click="chat-close">返回</button></div>
     <div class="nav-title" id="chat_title">聊天</div>
-    <div class="nav-right">
-      <button class="nbtn" id="chat_stop_btn" style="display:none;color:#fa5151;" data-click="chat-stop">⏹</button>
-      <button class="nbtn" data-click="chat-debug" title="调试">🐛</button>
-      <button class="nbtn" data-click="chat-memory" title="记忆" style="font-size:13px;">🧠</button>
-      <button class="nbtn" data-click="chat-settings">⋯</button>
+    <div class="nav-right chat-nav-actions">
+      <button class="nbtn chat-nav-action chat-nav-action--stop" id="chat_stop_btn" style="display:none;" data-click="chat-stop" title="终止">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="4" y="4" width="8" height="8" rx="2" fill="currentColor"></rect>
+        </svg>
+      </button>
+
+      <button class="nbtn chat-nav-action" data-click="chat-debug" title="调试">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 6.5V5a3 3 0 0 1 6 0v1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="5" y="7.5" width="14" height="10" rx="4" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M3 10h2M19 10h2M3 15h2M19 15h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="10" cy="12.5" r="1" fill="currentColor"/>
+          <circle cx="14" cy="12.5" r="1" fill="currentColor"/>
+        </svg>
+      </button>
+
+      <button class="nbtn chat-nav-action chat-nav-action--memory" data-click="chat-memory" title="记忆">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 4c-3.9 0-7 2.91-7 6.5 0 1.85.82 3.52 2.13 4.71.33.3.55.72.58 1.16l.08 1.13c.03.43.39.76.82.76h6.78c.43 0 .79-.33.82-.76l.08-1.13c.03-.44.25-.86.58-1.16A6.35 6.35 0 0 0 19 10.5C19 6.91 15.9 4 12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M9.5 20h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <button class="nbtn chat-nav-action" data-click="chat-settings" title="更多">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="5" cy="12" r="1.8" fill="currentColor"></circle>
+          <circle cx="12" cy="12" r="1.8" fill="currentColor"></circle>
+          <circle cx="19" cy="12" r="1.8" fill="currentColor"></circle>
+        </svg>
+      </button>
     </div>
   </div>
   <div class="chat-win">
