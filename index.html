@@ -7,6 +7,11 @@
 <meta name="x5-orientation" content="portrait">
 <meta name="x5-fullscreen" content="true">
 <meta name="full-screen" content="yes">
+<!-- iOS PWA 全屏支持 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="nico-phone">
+<meta name="theme-color" content="#1a1a2e">
 <title>nico-phone</title>
 <link rel="stylesheet" href="./app.css">
 <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
@@ -1094,5 +1099,11 @@
 <script src="./phonecheck.obf.js"></script>
 <script src="./weibo.obf.js"></script>
 <script src="./chat.obf.js"></script>
+<script>
+// iOS standalone 检测（兼容 iOS 26 以下所有版本）
+if(window.navigator.standalone === true){
+  document.body.classList.add('ios-standalone');
+}
+</script>
 </body>
 </html>

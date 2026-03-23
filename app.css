@@ -1,28 +1,60 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;overflow:hidden;width:100vw;height:100%;height:100dvh;background:#1a1a2e;display:flex;align-items:center;justify-content:center;}
+html{height:100%;height:100dvh;height:-webkit-fill-available;overflow:hidden;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  overflow:hidden;
+  width:100vw;
+  height:100vh;
+  height:100dvh;
+  min-height:100vh;
+  min-height:100dvh;
+  min-height:-webkit-fill-available;
+  background:#1a1a2e;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:fixed;
+  inset:0;
+  overscroll-behavior:none;
+  touch-action:manipulation;
+  -webkit-overflow-scrolling:touch;
+}
 .phone{width:100%;height:100%;position:relative;overflow:hidden;background:#fff;}
 @media(min-width:480px){.phone{max-width:428px;max-height:926px;border-radius:12px;box-shadow:0 0 40px rgba(0,0,0,.5);}}
-/* iOS PWA/独立窗口模式专属优化 */
+/* iOS PWA / standalone 模式 — 同时匹配 display-mode 和 iOS navigator.standalone */
 @media(display-mode: standalone){
-  /* 强制移除手机外壳限制，占满整个屏幕 */
   .phone{
     max-width: none !important;
     max-height: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     width: 100vw !important;
-    height: 100dvh !important; /* 使用动态视口高度 */
+    height: 100vh !important;
+    height: 100dvh !important;
+    /* 安全区留白交给子组件通过 env() 处理 */
   }
-  /* 隐藏桌面模式下的全屏按钮，因为 PWA 默认即全屏 */
   .desk-fullscreen-btn{
     display: none !important;
   }
-  /* 确保 body 不出现滚动条 */
   body{
     overflow: hidden !important;
     position: fixed !important;
     inset: 0 !important;
+    overscroll-behavior: none !important;
   }
+}
+/* iOS Safari navigator.standalone 兜底（JS 添加 class） */
+body.ios-standalone .phone{
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+}
+body.ios-standalone .desk-fullscreen-btn{
+  display: none !important;
 }
 
 /* CSS 伪全屏模式（用于 JS 强制切换） */
@@ -1630,14 +1662,6 @@ body.force-fullscreen .phone {
 .album-item-share { position:absolute; bottom:4px; right:4px; background:rgba(7,193,96,0.8); color:#fff; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; transition: transform 0.1s; }
 .album-item-share:active { transform: scale(0.85); }
 
-/* iOS 备用强制全屏 */
-body.force-fullscreen .phone {
-  max-width: none !important;
-  max-height: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
 /* 同人阅读/编辑弹窗隐藏滚动条 */
 #pg_novel .scroll::-webkit-scrollbar { display: none; }
 #pg_novel .scroll { scrollbar-width: none; }
@@ -1655,25 +1679,6 @@ body.force-fullscreen .phone {
 .guide-step:last-child{border-bottom:none;}
 .guide-num{width:22px;height:22px;border-radius:50%;background:#007aff;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
 .guide-tip{background:#f0f8ff;border-left:3px solid #007aff;padding:8px 12px;border-radius:0 8px 8px 0;font-size:13px;color:#555;line-height:1.7;margin-top:8px;}
-
-/* 横屏兜底：部分手机浏览器全屏后会误横屏，强制旋回竖屏视觉 */
-body.force-portrait-fallback{
-  overflow:hidden !important;
-}
-
-body.force-portrait-fallback .phone{
-  position:fixed !important;
-  top:50% !important;
-  left:50% !important;
-  width:100dvh !important;
-  height:100vw !important;
-  max-width:none !important;
-  max-height:none !important;
-  border-radius:0 !important;
-  box-shadow:none !important;
-  transform:translate(-50%,-50%) rotate(90deg) !important;
-  transform-origin:center center !important;
-}
 
 @media (orientation: landscape){
   body.force-fullscreen .phone{
