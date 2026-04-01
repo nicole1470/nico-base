@@ -448,9 +448,7 @@
         </div>
         <button class="st-btn p w100" style="margin-top:6px;" data-click="settings-mm-test-video">🧪 测试视频生成</button>
       </details>
-
     </div>
-
     <!-- 对话设置 -->
     <div class="sec-title">对话设置</div>
     <div class="card settings-card-pad-lg">
@@ -469,7 +467,7 @@
             style="width:90px;background:#f7f7f7;font-size:14px;color:#222;text-align:center;padding:5px 8px;border-radius:6px;">
         </div>
       </div>
-      <div style="border-top:1px solid #f2f2f2;padding-top:12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+      <div style="border-top:1px solid #f2f2f2;padding-top:12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
         <div>
           <div style="font-size:12px;color:#777;margin-bottom:5px;">温度</div>
           <input class="inp" type="number" id="s_temperature" min="0" max="2" step="0.1" style="padding:7px;font-size:13px;background:#f9f9f9;text-align:center;border-radius:7px;" placeholder="0.8">
@@ -479,20 +477,25 @@
           <input class="inp" type="number" id="s_top_p" min="0" max="1" step="0.1" style="padding:7px;font-size:13px;background:#f9f9f9;text-align:center;border-radius:7px;" placeholder="1">
         </div>
         <div>
-          <div style="font-size:12px;color:#777;margin-bottom:5px;">后台聊天巡检(s)</div>
-          <input class="inp" type="number" id="s_ai_proactive_sec" min="30" max="600" step="10" style="padding:7px;font-size:13px;background:#f9f9f9;text-align:center;border-radius:7px;" placeholder="300">
+          <div style="font-size:12px;color:#777;margin-bottom:5px;">上下文</div>
+          <button data-click="settings-ctx-p3" style="width:100%;padding:7px;font-size:13px;text-align:center;border-radius:7px;border:1px solid #e0e0e0;background:#f9f9f9;color:#576b95;font-weight:500;cursor:pointer;font-family:inherit;box-sizing:border-box;min-height:auto;">⚙ 配置</button>
         </div>
       </div>
-    </div>
-    <!-- 上下文注入策略 -->
-    <div class="sec-title">上下文</div>
-    <div class="card settings-card-pad">
-		<div style="display:flex;gap:7px;">
-		  <button class="btn btn-f" data-click="settings-ctx-p3" style="flex:1;margin:0;">⚡ 触发配置</button>
-		</div>
-		<div style="font-size:11px;color:#aaa;margin-top:6px;line-height:1.5;">
-		  调整触发关键词和随机注入概率
-		</div>
+      <div style="border-top:1px solid #f2f2f2;padding-top:12px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="font-size:14px;color:#222;font-weight:500;">后台巡检</div>
+          <label style="position:relative;display:inline-block;width:51px;height:31px;flex-shrink:0;">
+            <input type="checkbox" id="s_proactive_global" style="opacity:0;width:0;height:0;">
+            <span id="s_proactive_global_track" style="position:absolute;cursor:pointer;inset:0;background:#ccc;border-radius:31px;transition:.3s;"></span>
+            <span id="s_proactive_global_thumb" style="position:absolute;height:23px;width:23px;left:4px;bottom:4px;background:#fff;border-radius:50%;transition:.3s;box-shadow:0 1px 3px rgba(0,0,0,.3);"></span>
+          </label>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="font-size:13px;color:#555;">巡检间隔</div>
+          <input class="inp" type="number" id="s_ai_proactive_sec" min="30" max="600" step="10" style="width:70px;padding:5px 8px;font-size:14px;background:#f7f7f7;text-align:center;border-radius:6px;" placeholder="300">
+          <span style="font-size:12px;color:#aaa;">秒</span>
+        </div>
+      </div>
     </div>
     <!-- 桌面组件 -->
     <div class="sec-title">桌面组件</div>
@@ -555,8 +558,8 @@
 		  <button class="st-btn o flex1 center" data-click="settings-github-download">📥 下载恢复</button>
 		</div>
 		<div style="margin-top:8px;display:flex;gap:8px;">
-		  <button data-click="camera-github-backup-album" style="flex:1;padding:8px;background:#07c160;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;">📸 备份相册</button>
-		  <button data-click="camera-github-restore-album" style="flex:1;padding:8px;background:#576b95;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;">📥 恢复相册</button>
+		  <button data-click="settings-github-upload-zip" style="flex:1;padding:8px;background:#ff8200;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;">📸 备份ZIP(含图)</button>
+		  <button data-click="settings-github-download-zip" style="flex:1;padding:8px;background:#e91e8c;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;">📸 恢复ZIP</button>
 		</div>
       </div>
 
@@ -702,6 +705,7 @@
       <div class="multisel-count" id="multisel_count">已选 0 条</div>
       <button class="multisel-selall" data-click="chat-selall">全选</button>
       <button class="multisel-cancel" data-click="chat-cancel-multisel">取消</button>
+	  <button class="multisel-forward" data-click="chat-forward-selected">转发</button>
       <button class="multisel-del" data-click="chat-del-selected">删除</button>
     </div>
     <div class="quote-bar" id="qbar">

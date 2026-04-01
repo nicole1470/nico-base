@@ -658,9 +658,10 @@ body.force-fullscreen .phone {
 .multisel-bar{display:none;background:#fff;border-top:1px solid #e0e0e0;padding:10px 14px;flex-shrink:0;flex-direction:row;align-items:center;gap:10px;z-index:100;}
 .multisel-bar.on{display:flex;}
 .multisel-count{flex:1;font-size:14px;color:#555;}
-.multisel-del{padding:8px 20px;background:#fa5151;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;}
-.multisel-cancel{padding:8px 16px;background:#f2f2f2;color:#444;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;}
-.multisel-selall{padding:8px 12px;background:#576b95;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;}
+.multisel-del{padding:8px 12px;background:#fa5151;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;}
+.multisel-cancel{padding:8px 12px;background:#f2f2f2;color:#444;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;}
+.multisel-selall{padding:8px 12px;background:#576b95;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;}
+.multisel-forward{padding:8px 12px;background:#429B69;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit;}
 .msgs.multisel-mode .mrow{padding-left:36px;position:relative;transition:background .1s;}
 .msgs.multisel-mode .mrow::before{content:'';position:absolute;left:8px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;border:2px solid #ccc;background:#fff;box-sizing:border-box;z-index:10;pointer-events:none;}
 .msgs.multisel-mode .mrow.multisel-checked{background:rgba(7,193,96,.08);}
